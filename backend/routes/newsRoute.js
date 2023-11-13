@@ -16,7 +16,11 @@ const getNewsHandler = async (req, res, newsModel) => {
   const offset = (page - 1) * limit;
 
   try {
-    const results = await newsModel.find().skip(offset).limit(limit);
+    const results = await newsModel
+      .find()
+      .sort({ _id: -1 })
+      .skip(offset)
+      .limit(limit);
     res.json(results);
   } catch (err) {
     console.error(err.message);
