@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 import {
   hiruNewsModel,
   itnNewsModel,
@@ -28,18 +29,24 @@ const getNewsHandler = async (req, res, newsModel) => {
   }
 };
 
-// Define routes for different news models
-router.get("/hiru/:page", (req, res) =>
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+
+router.get("/hiru/:page", limiter, (req, res) =>
   getNewsHandler(req, res, hiruNewsModel)
 );
-router.get("/itn/:page", (req, res) => getNewsHandler(req, res, itnNewsModel));
-router.get("/asianmirror/:page", (req, res) =>
+router.get("/itn/:page", limiter, (req, res) =>
+  getNewsHandler(req, res, itnNewsModel)
+);
+router.get("/asianmirror/:page", limiter, (req, res) =>
   getNewsHandler(req, res, asianMirrorNewsModel)
 );
-router.get("/derana/:page", (req, res) =>
+router.get("/derana/:page", limiter, (req, res) =>
   getNewsHandler(req, res, deranaNewsModel)
 );
-router.get("/sirasa/:page", (req, res) =>
+router.get("/sirasa/:page", limiter, (req, res) =>
   getNewsHandler(req, res, sirasaNewsModel)
 );
 
