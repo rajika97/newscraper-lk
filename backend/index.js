@@ -19,12 +19,12 @@ app.use(
   })
 );
 app.use("/", newsRoute);
-connectToDB();
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-  console.log(`🚀 Server ready at: http://localhost:${PORT}`)
-);
+connectToDB().then(() => {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () =>
+    console.log(`🚀 Server ready at: http://localhost:${PORT}`)
+  );
+});
 
 setInterval(async () => {
   try {
@@ -36,4 +36,4 @@ setInterval(async () => {
   } catch (err) {
     console.error(err);
   }
-}, 1000 * 60 * 1);
+}, 1000 * 60 * 5);
