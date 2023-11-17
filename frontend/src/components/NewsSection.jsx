@@ -5,14 +5,15 @@ import CardList from "./CardList";
 import Spinner from "./Spinner";
 
 const NewsSection = ({ title, route }) => {
+  const PRODUCTION_URL = " https://newscraper-lk.vercel.app";
+  const DEV_URL = "http://localhost:3000";
   const [loading, setLoading] = useState(false);
   const [hiruNews, setHiruNews] = useState([]);
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/${route}/1`)
+      .get(`${PRODUCTION_URL}/${route}/1`)
       .then((res) => {
-        console.log(res.data);
         setHiruNews(res.data);
         setLoading(false);
       })
