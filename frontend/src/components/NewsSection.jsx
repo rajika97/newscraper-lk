@@ -5,7 +5,7 @@ import CardList from "./CardList";
 import Spinner from "./Spinner";
 
 const NewsSection = ({ title, route }) => {
-  const PRODUCTION_URL = " https://newscraper-lk.vercel.app";
+  const PRODUCTION_URL = " https://newscraper-lk-backend.vercel.app";
   const DEV_URL = "http://localhost:3000";
   const [loading, setLoading] = useState(false);
   const [hiruNews, setHiruNews] = useState([]);
