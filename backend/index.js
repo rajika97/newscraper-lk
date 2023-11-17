@@ -19,6 +19,15 @@ app.use(
   })
 );
 app.use("/", newsRoute);
+app.get("/", (req, res) => {
+  res.send(`
+    <html>
+      <body>
+        <h1>App started successfully!</h1>
+      </body>
+    </html>
+  `);
+});
 connectToDB().then(() => {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () =>
