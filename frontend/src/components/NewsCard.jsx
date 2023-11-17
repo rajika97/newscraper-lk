@@ -53,7 +53,7 @@ const NewsCard = ({ image, date, title, link }) => {
   const isImageLink = image.match(/\.(jpeg|jpg|png)$/);
 
   return (
-    <div className="flex-shrink-0 w-full sm:w-1/2 md:w-1/2 lg:w-1/4 px-6 mb-8 ">
+    <div className="flex-shrink-0 sm:w-1/2  lg:w-1/3 xl:w-1/4 px-2 mb-8">
       <Card variant="outlined" sx={{ width: 320 }}>
         <CardOverflow>
           <AspectRatio ratio="2">

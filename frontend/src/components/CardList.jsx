@@ -3,7 +3,7 @@ import NewsCard from "./NewsCard";
 
 const CardList = ({ newsList }) => {
   return (
-    <div className="flex overflow-x-auto m-8">
+    <div className="flex overflow-x-auto mt-6">
       {newsList.map((news) => (
         <NewsCard
           key={news._id}

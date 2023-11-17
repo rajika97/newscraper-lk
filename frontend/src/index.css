@@ -90,11 +90,11 @@
   opacity: 0.15;
 }
 
-@media screen and (max-width: 640px) {
+/* @media screen and (max-width: 640px) {
   .main {
     padding: 0;
   }
-}
+} */
 
 .footer {
   background-color: black;
