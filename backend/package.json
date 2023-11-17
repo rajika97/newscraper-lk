@@ -18,6 +18,7 @@
     "express-rate-limit": "^7.1.4",
     "mongoose": "^8.0.0",
     "nodemon": "^3.0.1",
-    "puppeteer": "^21.5.1"
+    "puppeteer": "^21.5.1",
+    "react-icons": "^4.11.0"
   }
 }
