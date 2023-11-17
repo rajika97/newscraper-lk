@@ -13,8 +13,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["*"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "https://newscraper-lk.vercel.app",
+    methods: ["GET"],
     allowedHeaders: ["Content-Type"],
   })
 );
