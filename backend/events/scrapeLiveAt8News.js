@@ -40,8 +40,6 @@ export const scrapeLiveAt8News = async (req, res) => {
         };
       }).slice(5, 17)
     );
-
-    console.log(data);
     res.json(data);
   } catch (error) {
     console.error(error);
