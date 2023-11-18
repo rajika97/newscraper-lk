@@ -8,13 +8,13 @@ const NewsSection = ({ title, route }) => {
   const PRODUCTION_URL = " https://newscraper-lk-backend.vercel.app";
   const DEV_URL = "http://localhost:3000";
   const [loading, setLoading] = useState(false);
-  const [hiruNews, setHiruNews] = useState([]);
+  const [news, setNews] = useState([]);
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${PRODUCTION_URL}/${route}/1`)
+      .get(`${DEV_URL}/${route}/1`)
       .then((res) => {
-        setHiruNews(res.data);
+        setNews(res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -31,7 +31,7 @@ const NewsSection = ({ title, route }) => {
       </span>
       {loading && <Spinner />}
       <div className="flex flex-wrap justify-around">
-        <CardList newsList={hiruNews} />
+        <CardList newsList={news} />
       </div>
     </section>
   );

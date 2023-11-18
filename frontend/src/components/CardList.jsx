@@ -9,7 +9,7 @@ const CardList = ({ newsList }) => {
           key={news._id}
           title={news.title}
           image={news.image}
-          date={news.createdDate}
+          date={news.date}
           link={news.link}
         />
       ))}

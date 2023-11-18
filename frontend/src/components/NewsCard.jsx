@@ -8,48 +8,6 @@ import Typography from "@mui/joy/Typography";
 import { AiOutlineCamera } from "react-icons/ai";
 
 const NewsCard = ({ image, date, title, link }) => {
-  // Function to format the date and time
-
-  const formatDate = (dateString) => {
-    const dateTime = new Date(dateString);
-    const today = new Date();
-
-    // Check if the date is today
-    if (
-      dateTime.getUTCFullYear() === today.getUTCFullYear() &&
-      dateTime.getUTCMonth() === today.getUTCMonth() &&
-      dateTime.getUTCDate() === today.getUTCDate()
-    ) {
-      const hours = dateTime.getUTCHours();
-      const minutes = dateTime.getUTCMinutes();
-      const ampm = hours >= 12 ? "PM" : "AM";
-      const formattedTime = `${hours % 12 || 12}:${
-        minutes < 10 ? "0" + minutes : minutes
-      } ${ampm}`;
-      return { formattedDate: "Today", formattedTime };
-    }
-
-    // Extract date components
-    const monthAbbreviation = new Intl.DateTimeFormat("en-US", {
-      month: "short",
-    }).format(dateTime);
-    const day = dateTime.getUTCDate();
-
-    let hours = dateTime.getUTCHours();
-    const minutes = dateTime.getUTCMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12; // Convert 0 to 12 for midnight
-
-    const formattedDate = `${monthAbbreviation} ${day}`;
-    const formattedTime = `${hours < 10 ? "0" + hours : hours}:${
-      minutes < 10 ? "0" + minutes : minutes
-    } ${ampm}`;
-
-    return { formattedDate, formattedTime };
-  };
-
-  const { formattedDate, formattedTime } = formatDate(date);
-
   const isImageLink = image.match(/\.(jpeg|jpg|png)$/);
 
   return (
@@ -84,15 +42,7 @@ const NewsCard = ({ image, date, title, link }) => {
               fontWeight="md"
               textColor="text.secondary"
             >
-              {formattedDate}
-            </Typography>
-            <Divider orientation="vertical" />
-            <Typography
-              level="body-xs"
-              fontWeight="md"
-              textColor="text.secondary"
-            >
-              {formattedTime}
+              {date}
             </Typography>
           </CardContent>
         </CardOverflow>

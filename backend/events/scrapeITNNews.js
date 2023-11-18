@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
-import { itnNewsModel } from "../models.js";
 
-async function scrapeITNNews() {
+export const scrapeITNNews = async (req, res) => {
+  const pageNumber = parseInt(req.params.page);
   const browser = await puppeteer.launch({
     headless: "new",
     args: [
@@ -14,40 +14,45 @@ async function scrapeITNNews() {
       process.env.NODE_ENV === "production"
         ? process.env.PUPPETEER_EXECUTABLE_PATH
         : puppeteer.executablePath(),
-    // `headless: true` (default) enables old Headless;
-    // `headless: 'new'` enables new Headless;
-    // `headless: false` enables “headful” mode.
   });
-  const page = await browser.newPage();
-  await page.goto("https://www.itnnews.lk/local/", {
-    waitUntil: "networkidle0",
-    timeout: 0,
-  });
-
-  const data = await page.evaluate(() =>
-    Array.from(document.querySelectorAll(".article-big"), (e) => ({
-      title: e.querySelector(".article-content h2").innerText,
-      date: e.querySelector(".article-content .meta a").innerText,
-      link: e.querySelector(".article-content h2 a").href,
-      image: e.querySelector(".article-photo img").src,
-    })).slice(0, 3)
-  );
-
-  await browser.close();
-
-  // Check if there are any new items in the database
-  const existingData = await itnNewsModel.find({});
-  const newItems = data.filter((item) => {
-    return !existingData.some((existingItem) => {
-      return existingItem.link === item.link;
+  try {
+    const page = await browser.newPage();
+    await page.goto(`https://www.itnnews.lk/local/page/${pageNumber}/`, {
+      waitUntil: "networkidle0",
+      timeout: 0,
     });
-  });
+    // Scroll to the bottom of the page
+    await page.evaluate(async () => {
+      await new Promise((resolve) => {
+        let totalHeight = 0;
+        const distance = 100;
+        const timer = setInterval(() => {
+          const scrollHeight = document.body.scrollHeight;
+          window.scrollBy(0, distance);
+          totalHeight += distance;
 
-  // If there are new items, add them to the database
-  if (newItems.length > 0) {
-    await itnNewsModel.insertMany(newItems);
-    console.log("New data added to ITN News table in MongoDB");
+          if (totalHeight >= scrollHeight) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, 100);
+      });
+    });
+
+    const data = await page.evaluate(() =>
+      Array.from(document.querySelectorAll(".article-big"), (e, index) => ({
+        _id: index + 1,
+        title: e.querySelector(".article-content h2").innerText,
+        date: e.querySelector(".article-content .meta a").innerText,
+        link: e.querySelector(".article-content h2 a").href,
+        image: e.querySelector(".article-photo img").src,
+      }))
+    );
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.send("Something went wrong!");
+  } finally {
+    await browser.close();
   }
-}
-
-export default scrapeITNNews;
+};

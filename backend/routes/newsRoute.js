@@ -1,53 +1,15 @@
 import express from "express";
-import rateLimit from "express-rate-limit";
-import {
-  hiruNewsModel,
-  itnNewsModel,
-  asianMirrorNewsModel,
-  deranaNewsModel,
-  sirasaNewsModel,
-} from "../models.js";
+import { scrapeAsianMirrorNews } from "../events/scrapeAsianMirrorNews.js";
+import { scrapeDeranaNews } from "../events/scrapeDeranaNews.js";
+import { scrapeHiruNews } from "../events/scrapeHiruNews.js";
+import { scrapeITNNews } from "../events/scrapeITNNews.js";
+import { scrapeLiveAt8News } from "../events/scrapeLiveAt8News.js";
 
 const router = express.Router();
-
-// Define a generic route handler function
-const getNewsHandler = async (req, res, newsModel) => {
-  const page = parseInt(req.params.page);
-  const limit = 10;
-  const offset = (page - 1) * limit;
-
-  try {
-    const results = await newsModel
-      .find()
-      .sort({ _id: -1 })
-      .skip(offset)
-      .limit(limit);
-    res.json(results);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-};
-
-const limiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-
-router.get("/hiru/:page", limiter, (req, res) =>
-  getNewsHandler(req, res, hiruNewsModel)
-);
-router.get("/itn/:page", limiter, (req, res) =>
-  getNewsHandler(req, res, itnNewsModel)
-);
-router.get("/asianmirror/:page", limiter, (req, res) =>
-  getNewsHandler(req, res, asianMirrorNewsModel)
-);
-router.get("/derana/:page", limiter, (req, res) =>
-  getNewsHandler(req, res, deranaNewsModel)
-);
-router.get("/sirasa/:page", limiter, (req, res) =>
-  getNewsHandler(req, res, sirasaNewsModel)
-);
+router.get("/hiru/:page", (req, res) => scrapeHiruNews(req, res));
+router.get("/itn/:page", (req, res) => scrapeITNNews(req, res));
+router.get("/asianmirror/:page", (req, res) => scrapeAsianMirrorNews(req, res));
+router.get("/derana/:page", (req, res) => scrapeDeranaNews(req, res));
+router.get("/liveat8/:page", (req, res) => scrapeLiveAt8News(req, res));
 
 export default router;
