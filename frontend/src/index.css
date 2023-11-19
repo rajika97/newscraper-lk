@@ -102,3 +102,11 @@
 .btn-disabled {
   background-color: #ccc; /* Change this to the color you want */
 }
+
+.head_text {
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+}
+
+.desc {
+  @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
+}
