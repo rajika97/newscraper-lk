@@ -10,8 +10,8 @@ Newscraper is a web application that scrapes data from real news websites and di
 
 ## Screenshots
 
-- [Home Screen](/Newscraper%20-%20Screenshot%201.png)
-- [News Screen](/Newscraper%20-%20Screenshot%202.png)
+- ![Home Screen](/Newscraper%20-%20Screenshot%201.png)
+- ![News Screen](/Newscraper%20-%20Screenshot%202.png)
 
 ## Techstack
 
