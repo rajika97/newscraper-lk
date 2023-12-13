@@ -8,13 +8,14 @@ import Spinner from "./Spinner";
 
 const NewsSection = ({ title, route }) => {
   const devUrl = "http://localhost:3000";
+  const prodUrl = "https://newscraper-lk.vercel.app";
   const [loading, setLoading] = useState(false);
   const [news, setNews] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${devUrl}/${route}/1`)
+      .get(`${prodUrl}/${route}/1`)
       .then((res) => {
         setNews(res.data);
         setLoading(false);
