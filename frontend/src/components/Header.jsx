@@ -8,7 +8,8 @@ const Header = () => {
       </div>
       <div>
         <h3 className="desc">
-          Get all the news you need, without having to visit multiple websites
+          Get all the news you need, REAL TIME, without having to visit multiple
+          websites
         </h3>
       </div>
     </div>
