@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://newscraper-lk.vercel.app", "http://localhost:5173"],
+    origin: ["https://newscraper.rajika.pro", "http://localhost:5173"],
     methods: ["GET"],
     allowedHeaders: ["Content-Type"],
   })

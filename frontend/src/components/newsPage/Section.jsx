@@ -10,6 +10,7 @@ import NewsCard from "../NewsCard";
 
 const Section = ({ title, route }) => {
   const devUrl = "http://localhost:3000";
+  const prodUrl = "https://newscraper-lk.vercel.app";
   const [loading, setLoading] = useState(false);
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,7 +18,7 @@ const Section = ({ title, route }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${devUrl}/${route}/${page}`)
+      .get(`${prodUrl}/${route}/${page}`)
       .then((res) => {
         setNewsList(res.data);
         setLoading(false);
