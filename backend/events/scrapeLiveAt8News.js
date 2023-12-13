@@ -1,62 +1,38 @@
-import puppeteerBrowser from "puppeteer";
-import puppeteerCore from "puppeteer-core";
-import chromeAwsLambda from "chrome-aws-lambda";
-
-let chrome = {};
-let puppeteer;
-
-if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-  chrome = chromeAwsLambda;
-  puppeteer = puppeteerCore;
-} else {
-  puppeteer = puppeteerBrowser;
-}
+import axios from "axios";
+import cheerio from "cheerio";
 
 export const scrapeLiveAt8News = async (req, res) => {
-  const pageNumber = parseInt(req.params.page);
-  let options = { headless: "new" };
-
-  if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-    options = {
-      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chrome.defaultViewport,
-      executablePath: await chrome.executablePath,
-      headless: true,
-      ignoreHTTPSErrors: true,
-    };
-  }
-
-  const browser = await puppeteer.launch(options);
   try {
-    const page = await browser.newPage();
-    await page.goto(
-      `https://liveat8.lk/page/${pageNumber}/?tags=hot-news&post_type=post`,
-      {
-        waitUntil: "networkidle0",
-        timeout: 0,
-      }
+    const pageNumber = parseInt(req.params.page);
+
+    const response = await axios.get(
+      `https://liveat8.lk/page/${pageNumber}/?tags=hot-news&post_type=post`
     );
-    const data = await page.evaluate(() =>
-      Array.from(document.querySelectorAll(".item"), (e, index) => {
-        const titleElement = e.querySelector(".item-bot-content h3 a");
-        const dateElement = e.querySelector(".item-bot-content .item-meta a");
-        const linkElement = e.querySelector(".item-bot-content h3 a");
-        const imageElement = e.querySelector(".sneeit-thumb-landscape img");
+
+    const $ = cheerio.load(response.data);
+
+    // Extracting data
+    const data = $(".item")
+      .slice(5, 17)
+      .map((index, element) => {
+        const titleElement = $(element).find(".item-bot-content h3 a");
+        const dateElement = $(element).find(".item-bot-content .item-meta a");
+        const linkElement = $(element).find(".item-bot-content h3 a");
+        const imageElement = $(element).find(".sneeit-thumb img");
 
         return {
           _id: index + 1,
-          title: titleElement ? titleElement.innerText : "",
-          date: dateElement ? dateElement.innerText : "",
-          link: linkElement ? linkElement.href : "",
-          image: imageElement ? imageElement.src : "",
+          title: titleElement.text(),
+          date: dateElement.text(),
+          link: linkElement.attr("href"),
+          image: imageElement.attr("data-s"),
         };
-      }).slice(5, 17)
-    );
+      })
+      .get();
+
     res.json(data);
   } catch (error) {
     console.error(error);
     res.send("Something went wrong!");
-  } finally {
-    await browser.close();
   }
 };

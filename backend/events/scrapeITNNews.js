@@ -1,70 +1,44 @@
-import puppeteerBrowser from "puppeteer";
-import puppeteerCore from "puppeteer-core";
-import chromeAwsLambda from "chrome-aws-lambda";
-
-let chrome = {};
-let puppeteer;
-
-if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-  chrome = chromeAwsLambda;
-  puppeteer = puppeteerCore;
-} else {
-  puppeteer = puppeteerBrowser;
-}
+import axios from "axios";
+import cheerio from "cheerio";
 
 export const scrapeITNNews = async (req, res) => {
-  const pageNumber = parseInt(req.params.page);
-  let options = { headless: "new" };
-
-  if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-    options = {
-      args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chrome.defaultViewport,
-      executablePath: await chrome.executablePath,
-      headless: true,
-      ignoreHTTPSErrors: true,
-    };
-  }
-
-  const browser = await puppeteer.launch(options);
   try {
-    const page = await browser.newPage();
-    await page.goto(`https://www.itnnews.lk/local/page/${pageNumber}/`, {
-      waitUntil: "networkidle0",
-      timeout: 0,
-    });
-    // Scroll to the bottom of the page
-    await page.evaluate(async () => {
-      await new Promise((resolve) => {
-        let totalHeight = 0;
-        const distance = 100;
-        const timer = setInterval(() => {
-          const scrollHeight = document.body.scrollHeight;
-          window.scrollBy(0, distance);
-          totalHeight += distance;
+    const pageNumber = parseInt(req.params.page);
 
-          if (totalHeight >= scrollHeight) {
-            clearInterval(timer);
-            resolve();
-          }
-        }, 100);
-      });
-    });
-
-    const data = await page.evaluate(() =>
-      Array.from(document.querySelectorAll(".article-big"), (e, index) => ({
-        _id: index + 1,
-        title: e.querySelector(".article-content h2").innerText,
-        date: e.querySelector(".article-content .meta a").innerText,
-        link: e.querySelector(".article-content h2 a").href,
-        image: e.querySelector(".article-photo img").src,
-      }))
+    const response = await axios.get(
+      `https://www.itnnews.lk/local/page/${pageNumber}/`
     );
+
+    const $ = cheerio.load(response.data);
+
+    // Extracting data
+    const data = $(".article-big")
+      .map((index, element) => {
+        const title = $(element).find(".article-content h2").text();
+        const rawDate = $(element).find(".article-content .meta a").text();
+        const date = extractFormattedDate(rawDate);
+        const link = $(element).find(".article-content h2 a").attr("href");
+        const image = $(element).find(".article-photo img").attr("data-src");
+
+        return {
+          _id: index + 1,
+          title,
+          date,
+          link,
+          image,
+        };
+      })
+      .get();
+
     res.json(data);
   } catch (error) {
     console.error(error);
     res.send("Something went wrong!");
-  } finally {
-    await browser.close();
   }
 };
+
+// Function to extract formatted date using regular expressions
+function extractFormattedDate(rawDate) {
+  const match = rawDate.match(/(\d{2}:\d{2}, \d+\.\S+\. \d{4})/);
+  return match ? match[0] : "";
+}
