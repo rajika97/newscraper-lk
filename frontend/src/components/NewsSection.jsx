@@ -15,7 +15,7 @@ const NewsSection = ({ title, route }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${devUrl}/${route}/1`)
+      .get(`${prodUrl}/${route}/1`)
       .then((res) => {
         setNews(res.data);
         setLoading(false);
