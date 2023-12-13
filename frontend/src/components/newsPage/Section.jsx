@@ -18,7 +18,7 @@ const Section = ({ title, route }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${prodUrl}/${route}/${page}`)
+      .get(`${devUrl}/${route}/${page}`)
       .then((res) => {
         setNewsList(res.data);
         setLoading(false);

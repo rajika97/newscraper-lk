@@ -8,7 +8,7 @@ import Typography from "@mui/joy/Typography";
 import { AiOutlineCamera } from "react-icons/ai";
 
 const NewsCard = ({ image, date, title, link }) => {
-  const isImageLink = image.match(/\.(jpeg|jpg|png)$/);
+  const isImageLink = image.match(/\.(jpeg|jpg|png|gif)$/);
 
   return (
     <div className="flex-shrink-0 sm:w-1/2  lg:w-1/3 xl:w-1/4 px-2 mb-8">

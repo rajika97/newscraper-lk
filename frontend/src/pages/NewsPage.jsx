@@ -20,6 +20,8 @@ const NewsPage = () => {
             return <Section title="Asian Mirror News" route="asianmirror" />;
           } else if (newsRoute === "hiru") {
             return <Section title="Hiru News" route="hiru" />;
+          } else if (newsRoute === "lankadeepa") {
+            return <Section title="Lankadeepa News" route="lankadeepa" />;
           } else {
             return <h1>404 Not Found</h1>;
           }
