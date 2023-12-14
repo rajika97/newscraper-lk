@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="flex flex-col items-center justify-center pt-6">
+    <div className="flex flex-col items-center justify-center pt-6 pr-8">
       <div>
         <h1 className="head_text">Newscraper</h1>
       </div>
