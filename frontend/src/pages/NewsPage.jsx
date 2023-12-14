@@ -2,12 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Section from "../components/newsPage/Section";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const NewsPage = () => {
   const { newsRoute } = useParams();
   return (
     <div className="body">
-      <div className="main pl-8">
+      <div className="pl-8">
         <Header />
         {(() => {
           if (newsRoute === "derana") {
@@ -26,6 +27,7 @@ const NewsPage = () => {
             return <h1>404 Not Found</h1>;
           }
         })()}
+        <Footer />
       </div>
     </div>
   );
