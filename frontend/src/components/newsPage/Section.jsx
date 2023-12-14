@@ -7,6 +7,7 @@ import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import Spinner from "../Spinner";
 import NewsCard from "../NewsCard";
+import FloatingArrowButton from "../FloatingArrowButton";
 
 const Section = ({ title, route }) => {
   const devUrl = import.meta.env.VITE_APP_DEV_URL || "http://localhost:3000";
@@ -34,8 +35,12 @@ const Section = ({ title, route }) => {
       });
   }, [page]);
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <section className="py-8">
+    <section className="pt-8">
       <div className="flex items-center">
         <button onClick={() => navigate("/")} className="pr-6 btn-large">
           <FaArrowAltCircleLeft size={32} />
@@ -95,6 +100,7 @@ const Section = ({ title, route }) => {
           <FaRegArrowAltCircleRight size={24} />
         </button>
       </div>
+      <FloatingArrowButton onClick={scrollToTop} />
     </section>
   );
 };
