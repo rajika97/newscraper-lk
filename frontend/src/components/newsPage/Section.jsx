@@ -9,8 +9,9 @@ import Spinner from "../Spinner";
 import NewsCard from "../NewsCard";
 
 const Section = ({ title, route }) => {
-  const devUrl = "http://localhost:3000";
-  const prodUrl = "https://newscraper-lk.vercel.app";
+  const devUrl = import.meta.env.REACT_APP_DEV_URL || "http://localhost:3000";
+  const prodUrl =
+    import.meta.env.REACT_APP_PROD_URL || "https://newscraper-lk.vercel.app";
   const [loading, setLoading] = useState(false);
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
@@ -18,7 +19,11 @@ const Section = ({ title, route }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${prodUrl}/${route}/${page}`)
+      .get(
+        `${
+          import.meta.env.REACT_APP_ENV === "production" ? prodUrl : devUrl
+        }/${route}/${page}`
+      )
       .then((res) => {
         setNewsList(res.data);
         setLoading(false);

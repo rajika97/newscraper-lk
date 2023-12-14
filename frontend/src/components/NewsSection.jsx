@@ -7,15 +7,20 @@ import CardList from "./CardList";
 import Spinner from "./Spinner";
 
 const NewsSection = ({ title, route }) => {
-  const devUrl = "http://localhost:3000";
-  const prodUrl = "https://newscraper-lk.vercel.app";
+  const devUrl = import.meta.env.REACT_APP_DEV_URL || "http://localhost:3000";
+  const prodUrl =
+    import.meta.env.REACT_APP_PROD_URL || "https://newscraper-lk.vercel.app";
   const [loading, setLoading] = useState(false);
   const [news, setNews] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${prodUrl}/${route}/1`)
+      .get(
+        `${
+          import.meta.env.REACT_APP_ENV === "production" ? prodUrl : devUrl
+        }/${route}/1`
+      )
       .then((res) => {
         setNews(res.data);
         setLoading(false);
