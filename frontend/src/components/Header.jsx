@@ -8,8 +8,10 @@ const Header = () => {
       </div>
       <div>
         <h3 className="desc">
-          Get all the news you need, REAL TIME, without having to visit multiple
-          websites
+          Stay informed with the latest Sri Lankan Sinhala News at your
+          fingertips! This website scours multiple sources in real time, so you
+          don't have to. Get all the updates without the hassle of jumping
+          between different sites
         </h3>
       </div>
     </div>
