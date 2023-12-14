@@ -13,6 +13,7 @@ const Home = () => {
         <NewsSection title="ITN News" route="itn" />
         <NewsSection title="Derana News" route="derana" />
         <NewsSection title="Ada News" route="ada" />
+        <NewsSection title="BBC News" route="bbc" />
         <NewsSection title="Live At 8 News" route="liveat8" />
         <NewsSection title="Asian Mirror News" route="asianmirror" />
         <NewsSection title="Lankadeepa News" route="lankadeepa" />
