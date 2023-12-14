@@ -27,6 +27,8 @@ const NewsPage = () => {
             return <Section title="Ada News" route="ada" />;
           } else if (newsRoute === "neth") {
             return <Section title="Neth News" route="neth" />;
+          } else if (newsRoute === "lankatruth") {
+            return <Section title="Lanka Truth News" route="lankatruth" />;
           } else {
             return <h1>404 Not Found</h1>;
           }

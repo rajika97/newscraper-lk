@@ -7,6 +7,7 @@ import { scrapeLiveAt8News } from "../events/scrapeLiveAt8News.js";
 import { scrapeLankadeepaNews } from "../events/scrapeLankadeepaNews.js";
 import { scrapeAdaNews } from "../events/scrapeAdaNews.js";
 import { scrapeNethNews } from "../events/scrapeNethNews.js";
+import { scrapeLankaTruthNews } from "../events/scrapeLankaTruthNews.js";
 
 const router = express.Router();
 router.get("/hiru/:page", (req, res) => scrapeHiruNews(req, res));
@@ -17,5 +18,6 @@ router.get("/liveat8/:page", (req, res) => scrapeLiveAt8News(req, res));
 router.get("/lankadeepa/:page", (req, res) => scrapeLankadeepaNews(req, res));
 router.get("/ada/:page", (req, res) => scrapeAdaNews(req, res));
 router.get("/neth/:page", (req, res) => scrapeNethNews(req, res));
+router.get("/lankatruth/:page", (req, res) => scrapeLankaTruthNews(req, res));
 
 export default router;
