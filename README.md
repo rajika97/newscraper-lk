@@ -12,7 +12,7 @@ Newscraper is a web application that scrapes data from real news websites and di
 
 ## Techstack
 
-- Puppeteer: A Node.js library used for web scraping.
+- Cheerio: A Node.js library used for web scraping.
 - Node.js: Used for the backend development.
 - React.js: Used for building the user interface.
 - Tailwind CSS: Used for styling the frontend.
@@ -52,8 +52,24 @@ To run Newscraper locally, follow these steps:
    cd ..
    cd frontend
    npm install
+
+   ```
+
+6. Add .env in the frontend directory and add the followings
+
+   ```bash
+   VITE_APP_DEV_URL=http://localhost:3000
+   VITE_APP_PROD_URL=https://newscraper-lk.vercel.app
+   VITE_APP_ENV=development
+
+   ```
+
+7. Run the project
+
+   ```bash
+
    npm run dev
 
    ```
 
-6. Your Newscraper frontend should now be running at http://localhost:5173
+8. Your Newscraper frontend should now be running at http://localhost:5173
