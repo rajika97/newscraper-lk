@@ -17,6 +17,7 @@ const Home = () => {
         <NewsSection title="Live At 8 News" route="liveat8" />
         <NewsSection title="Asian Mirror News" route="asianmirror" />
         <NewsSection title="Lankadeepa News" route="lankadeepa" />
+        <NewsSection title="Divaina News" route="divaina" />
         <NewsSection title="Neth News" route="neth" />
         <NewsSection title="Lanka Truth News" route="lankatruth" />
         <Footer />
