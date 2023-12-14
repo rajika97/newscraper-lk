@@ -14,8 +14,11 @@ export const scrapeHiruNews = async (req, res) => {
     const data = $(".trending-section .row .column:nth-child(3)")
       .map((index, element) => ({
         _id: index + 1,
-        title: $(element).find(".all-section-tittle a:nth-child(2)").text(),
-        date: $(element).find(".middle-tittle-time").text(),
+        title: $(element)
+          .find(".all-section-tittle a:nth-child(2)")
+          .text()
+          .trim(),
+        date: $(element).find(".middle-tittle-time").text().trim(),
         link: $(element)
           .find(".all-section-tittle a:nth-child(2)")
           .attr("href"),

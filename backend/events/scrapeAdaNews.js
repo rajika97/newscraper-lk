@@ -13,7 +13,7 @@ export const scrapeAdaNews = async (req, res) => {
 
     const data = $(".row .row")
       .map((index, element) => {
-        const title = $(element).find(".cat-detail-1 h5").text();
+        const title = $(element).find(".cat-detail-1 h5").text().trim();
         const date = $(element).find(".cat-detail-1 h6").text().trim();
         const link = $(element).find(".cat-image a").attr("href");
         const image = $(element).find(".cat-image img").attr("src");

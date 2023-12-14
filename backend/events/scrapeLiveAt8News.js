@@ -22,8 +22,8 @@ export const scrapeLiveAt8News = async (req, res) => {
 
         return {
           _id: index + 1,
-          title: titleElement.text(),
-          date: dateElement.text(),
+          title: titleElement.text().trim(),
+          date: dateElement.text().trim(),
           link: linkElement.attr("href"),
           image: imageElement.attr("data-s"),
         };

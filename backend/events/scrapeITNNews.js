@@ -14,7 +14,7 @@ export const scrapeITNNews = async (req, res) => {
     // Extracting data
     const data = $(".article-big")
       .map((index, element) => {
-        const title = $(element).find(".article-content h2").text();
+        const title = $(element).find(".article-content h2").text().trim();
         const rawDate = $(element).find(".article-content .meta a").text();
         const date = extractFormattedDate(rawDate);
         const link = $(element).find(".article-content h2 a").attr("href");

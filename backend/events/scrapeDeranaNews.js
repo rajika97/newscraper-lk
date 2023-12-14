@@ -14,8 +14,12 @@ export const scrapeDeranaNews = async (req, res) => {
     const data = $(".news-story")
       .map((index, element) => ({
         _id: index + 1,
-        title: $(element).find(".story-text h2").text(),
-        date: $(element).find(".story-text .comments span").text().slice(2),
+        title: $(element).find(".story-text h2").text().trim(),
+        date: $(element)
+          .find(".story-text .comments span")
+          .text()
+          .slice(2)
+          .trim(),
         link: `https://sinhala.adaderana.lk/${$(element)
           .find(".story-text a")
           .attr("href")}`,

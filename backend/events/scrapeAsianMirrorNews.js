@@ -16,8 +16,8 @@ export const scrapeAsianMirrorNews = async (req, res) => {
     const data = $("#list .col-sm-6")
       .map((index, element) => ({
         _id: index + 1,
-        title: $(element).find(".txtbox h3").text(),
-        date: $(element).find(".txtbox .datemob").text(),
+        title: $(element).find(".txtbox h3").text().trim(),
+        date: $(element).find(".txtbox .datemob").text().trim(),
         link: $(element).find("a").attr("href"),
         image: $(element).find(".imgwrp img").attr("src").trim(),
       }))
