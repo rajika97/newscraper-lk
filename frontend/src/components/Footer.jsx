@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="footer pr-8">
+    <footer className="footer">
       <p className="disclaimer">
         Disclaimer: We do not own the content displayed on this website. All
         news content and rights belong to their respective websites. This
