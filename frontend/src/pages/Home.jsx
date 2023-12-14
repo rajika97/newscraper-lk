@@ -19,7 +19,7 @@ const Home = () => {
         <NewsSection title="Lankadeepa News" route="lankadeepa" />
         <NewsSection title="Divaina News" route="divaina" />
         <NewsSection title="Neth News" route="neth" />
-        <NewsSection title="Lanka Truth News" route="lankatruth" />
+        {/* <NewsSection title="Lanka Truth News" route="lankatruth" /> */}
         <Footer />
       </div>
     </div>

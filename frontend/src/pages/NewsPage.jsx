@@ -31,8 +31,8 @@ const NewsPage = () => {
             return <Section title="Lanka Truth News" route="lankatruth" />;
           } else if (newsRoute === "bbc") {
             return <Section title="BBC News" route="bbc" />;
-          } else if (newsRoute === "divaina") {
-            return <Section title="Divaina News" route="divaina" />;
+            // } else if (newsRoute === "divaina") {
+            // return <Section title="Divaina News" route="divaina" />;
           } else {
             return <h1>404 Not Found</h1>;
           }
