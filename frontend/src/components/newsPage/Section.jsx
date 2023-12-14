@@ -9,9 +9,9 @@ import Spinner from "../Spinner";
 import NewsCard from "../NewsCard";
 
 const Section = ({ title, route }) => {
-  const devUrl = import.meta.env.REACT_APP_DEV_URL || "http://localhost:3000";
+  const devUrl = import.meta.env.VITE_APP_DEV_URL || "http://localhost:3000";
   const prodUrl =
-    import.meta.env.REACT_APP_PROD_URL || "https://newscraper-lk.vercel.app";
+    import.meta.env.VITE_APP_PROD_URL || "https://newscraper-lk.vercel.app";
   const [loading, setLoading] = useState(false);
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
@@ -21,7 +21,7 @@ const Section = ({ title, route }) => {
     axios
       .get(
         `${
-          import.meta.env.REACT_APP_ENV === "production" ? prodUrl : devUrl
+          import.meta.env.VITE_APP_ENV === "production" ? prodUrl : devUrl
         }/${route}/${page}`
       )
       .then((res) => {
