@@ -13,9 +13,9 @@ const NewsPage = () => {
         {(() => {
           if (newsRoute === "derana") {
             return <Section title="Derana News" route="derana" />;
-          } else if (newsRoute === "liveat8") {
-            return <Section title="BBC News" route="bbc" />;
           } else if (newsRoute === "bbc") {
+            return <Section title="BBC News" route="bbc" />;
+          } else if (newsRoute === "itn") {
             return <Section title="ITN News" route="itn" />;
           } else if (newsRoute === "asianmirror") {
             return <Section title="Asian Mirror News" route="asianmirror" />;
