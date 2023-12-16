@@ -9,8 +9,8 @@ const Home = () => {
     <div className="body">
       <div className="pl-8">
         <Header />
-        <NewsSection title="Sirasa News" route="sirasa" />
         <NewsSection title="Hiru News" route="hiru" />
+        <NewsSection title="Sirasa News" route="sirasa" />
         <NewsSection title="ITN News" route="itn" />
         <NewsSection title="Derana News" route="derana" />
         <NewsSection title="Ada News" route="ada" />
