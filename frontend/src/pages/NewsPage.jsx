@@ -29,6 +29,8 @@ const NewsPage = () => {
             return <Section title="Neth News" route="neth" />;
           } else if (newsRoute === "lankatruth") {
             return <Section title="Lanka Truth News" route="lankatruth" />;
+          } else if (newsRoute === "colombotimes") {
+            return <Section title="Colombo Times News" route="colombotimes" />;
           } else if (newsRoute === "sirasa") {
             return <Section title="Sirasa News" route="sirasa" />;
             // } else if (newsRoute === "divaina") {

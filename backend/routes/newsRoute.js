@@ -11,6 +11,7 @@ import { scrapeLankaTruthNews } from "../events/scrapeLankaTruthNews.js";
 import { scrapeBbcNews } from "../events/scrapeBbcNews.js";
 import { scrapeDivainaNews } from "../events/scrapeDivainaNews.js";
 import { scrapeSirasaNews } from "../events/scrapeSirasaNews.js";
+import { scrapeColomboTimesNews } from "../events/scrapeColomboTimesNews.js";
 
 const router = express.Router();
 router.get("/hiru/:page", (req, res) => scrapeHiruNews(req, res));
@@ -25,5 +26,8 @@ router.get("/lankatruth/:page", (req, res) => scrapeLankaTruthNews(req, res));
 router.get("/bbc/:page", (req, res) => scrapeBbcNews(req, res));
 router.get("/divaina/:page", (req, res) => scrapeDivainaNews(req, res));
 router.get("/sirasa/:page", (req, res) => scrapeSirasaNews(req, res));
+router.get("/colombotimes/:page", (req, res) =>
+  scrapeColomboTimesNews(req, res)
+);
 
 export default router;
