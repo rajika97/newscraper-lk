@@ -14,8 +14,8 @@ const NewsPage = () => {
           if (newsRoute === "derana") {
             return <Section title="Derana News" route="derana" />;
           } else if (newsRoute === "liveat8") {
-            return <Section title="Live At 8 News" route="liveat8" />;
-          } else if (newsRoute === "itn") {
+            return <Section title="BBC News" route="bbc" />;
+          } else if (newsRoute === "bbc") {
             return <Section title="ITN News" route="itn" />;
           } else if (newsRoute === "asianmirror") {
             return <Section title="Asian Mirror News" route="asianmirror" />;
@@ -29,8 +29,8 @@ const NewsPage = () => {
             return <Section title="Neth News" route="neth" />;
           } else if (newsRoute === "lankatruth") {
             return <Section title="Lanka Truth News" route="lankatruth" />;
-          } else if (newsRoute === "bbc") {
-            return <Section title="BBC News" route="bbc" />;
+          } else if (newsRoute === "sirasa") {
+            return <Section title="Sirasa News" route="sirasa" />;
             // } else if (newsRoute === "divaina") {
             // return <Section title="Divaina News" route="divaina" />;
           } else {
