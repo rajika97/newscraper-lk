@@ -5,7 +5,7 @@ export const scrapeSirasaNews = async (req, res) => {
     const pageNumber = parseInt(req.params.page);
 
     const response = await axios.get(
-      `https://apisinhala.newsfirst.lk/post/PostPagination/${pageNumber}/10/`
+      `https://apisinhala.newsfirst.lk/post/PostPagination/${pageNumber}/5/`
     );
 
     const data = response.data.postResponseDto.map((element, index) => ({
