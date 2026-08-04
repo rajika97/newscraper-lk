@@ -4,8 +4,6 @@
 
 Get all the news you need, without having to visit multiple websites
 
-Check out the site: https://newscraper.rajika.pro
-
 ## Introduction
 
 Newscraper is a web application that scrapes data from real news websites and displays it to users. With Newscraper, you can stay updated with the latest news without having to visit multiple websites. The application provides a user-friendly interface and allows you to easily browse and read news articles from various sources.
